@@ -1,2 +1,3 @@
 # SpringBoot_Learning
-My Spring Boot learning
+  - logging-log4j2
+  - EMail
