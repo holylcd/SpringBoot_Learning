@@ -1,6 +1,7 @@
 package org.restfulapi.controller;
 
 import org.restfulapi.entity.User;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -22,6 +23,7 @@ public class UserController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public Map<String, Object> add(@ModelAttribute User user) {
+
         int id = map0.size()+1;
         map0.put(id, user);
 

@@ -1,6 +1,7 @@
 package org.restfulapi.entity;
 
 import lombok.Data;
+import lombok.NonNull;
 
 /**
  * @author holy
@@ -8,7 +9,7 @@ import lombok.Data;
 @Data
 public class User {
 
-    private String username;
+    private @NonNull String username;
 
-    private String password;
+    private @NonNull String password;
 }
