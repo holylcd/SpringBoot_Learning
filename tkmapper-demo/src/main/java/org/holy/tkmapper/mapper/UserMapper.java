@@ -2,6 +2,7 @@ package org.holy.tkmapper.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.holy.tkmapper.common.magger.BaseMapper;
+import org.holy.tkmapper.domain.UserInfo;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,5 +13,5 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface UserMapper<T> extends BaseMapper<T> {
+public interface UserMapper extends BaseMapper<UserInfo> {
 }

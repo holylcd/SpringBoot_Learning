@@ -29,12 +29,21 @@ spring:
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
-    default-property-inclusion: non_null
+
 
 mybatis:
   mapper-locations: classpath:mybatis/*Mapper.xml
   configuration:
     map-underscore-to-camel-case: true
+
+
+pagehelper:
+  helper-dialect: mysql
+
+
+mapper:
+  identity: MYSQL
+
 
 # logging
 logging:
@@ -45,5 +54,4 @@ logging:
     root: info
     web: debug
     sql: debug
-    service: info
-
+    service: debug

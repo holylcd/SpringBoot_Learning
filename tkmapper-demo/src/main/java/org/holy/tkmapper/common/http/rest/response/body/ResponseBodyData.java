@@ -1,14 +1,15 @@
-package org.holy.tkmapper.common.http.rest.body;
+package org.holy.tkmapper.common.http.rest.response.body;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
 
 /**
- * 业务正常时的响应体
+ * 业务正常时的响应体，带 data
  * @author holy
  * @email holylcd@foxmail.com
  * @date 2019/4/12
@@ -16,18 +17,22 @@ import java.io.Serializable;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class ResponseBody implements Serializable {
+@Getter
+public class ResponseBodyData<T> implements Serializable {
 
-	private static final long serialVersionUID = 7581339796446717946L;
+	private static final long serialVersionUID = 7688867097199205758L;
 
 	private Integer code;
 
 	private String msg;
 
-	public static ResponseBody ok() {
-		return new ResponseBody(
+	private T data;
+
+	public static <T> ResponseBodyData<T> ok(T data) {
+		return new ResponseBodyData<>(
 				HttpStatus.OK.value(),
-				HttpStatus.OK.getReasonPhrase()
+				HttpStatus.OK.getReasonPhrase(),
+				data
 		);
 	}
 }

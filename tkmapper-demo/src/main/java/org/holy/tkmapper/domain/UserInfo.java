@@ -2,7 +2,11 @@ package org.holy.tkmapper.domain;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import tk.mybatis.mapper.annotation.NameStyle;
+import tk.mybatis.mapper.code.Style;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -13,9 +17,12 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
+//@NameStyle(Style.camelhump)
+//@Table(name = "user_info")
 public class UserInfo implements Serializable {
+    @Id
     private Long id;
-    private String accout;
+    private String account;
     private String realname;
     private String password;
     private String status;

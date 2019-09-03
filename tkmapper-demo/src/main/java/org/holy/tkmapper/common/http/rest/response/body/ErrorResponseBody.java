@@ -1,7 +1,8 @@
-package org.holy.tkmapper.common.http.rest.body;
+package org.holy.tkmapper.common.http.rest.response.body;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
@@ -17,6 +18,7 @@ import java.io.Serializable;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
 public class ErrorResponseBody implements Serializable {
 
 	private static final long serialVersionUID = -3510814042352393019L;

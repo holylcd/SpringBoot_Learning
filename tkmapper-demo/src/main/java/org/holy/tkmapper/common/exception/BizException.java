@@ -15,30 +15,20 @@ import javax.validation.constraints.NotNull;
 public class BizException extends BaseException {
 
     public BizException() {
-        this(DEFAULT_HTTP_STATUS, DEFAULT_MESSAGE);
+        this(DEFAULT_HTTP_STATUS);
     }
 
     public BizException(@NotNull HttpStatus httpStatus) {
-        this(httpStatus, DEFAULT_MESSAGE);
+        super(httpStatus);
     }
 
-    public BizException(@NotBlank String message) {
-        this(DEFAULT_HTTP_STATUS, message);
+    public BizException(@NotNull HttpStatus httpStatus, @NotNull Throwable cause) {
+        super(httpStatus, cause);
     }
 
-    public BizException(@NotNull HttpStatus httpStatus, @NotBlank String message) {
-        super(httpStatus, message);
-    }
-
-    public BizException(@NotNull HttpStatus httpStatus, @NotBlank String message,
-                        @NotNull Throwable cause) {
-        super(httpStatus, message, cause);
-    }
-
-    public BizException(@NotNull HttpStatus httpStatus, @NotBlank String message,
-                        @NotNull Throwable cause, boolean enableSuppression,
-                        boolean writableStackTrace) {
-        super(httpStatus, message, cause, enableSuppression, writableStackTrace);
+    public BizException(@NotNull HttpStatus httpStatus, @NotNull Throwable cause,
+                        boolean enableSuppression, boolean writableStackTrace) {
+        super(httpStatus, cause, enableSuppression, writableStackTrace);
     }
 
 }
