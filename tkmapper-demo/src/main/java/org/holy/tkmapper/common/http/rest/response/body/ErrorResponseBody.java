@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.holy.tkmapper.constants.biz.IBizStatus;
 
 import java.io.Serializable;
 
@@ -23,16 +23,22 @@ public class ErrorResponseBody implements Serializable {
 
 	private static final long serialVersionUID = -3510814042352393019L;
 
+	/**
+	 * 业务状态码
+	 */
 	private Integer code;
 
+	/**
+	 * 业务消息
+	 */
 	private String msg;
 
-	public static ErrorResponseBody err(HttpStatus httpStatus) {
-		return new ErrorResponseBody(httpStatus.value(), httpStatus.getReasonPhrase());
+	public static ErrorResponseBody err(IBizStatus bizStatus) {
+		return new ErrorResponseBody(bizStatus.getCode(), bizStatus.getMsg());
 	}
 
-	public static ErrorResponseBody err(HttpStatus httpStatus, String msg) {
-		return new ErrorResponseBody(httpStatus.value(), msg);
+	public static ErrorResponseBody err(Integer code, String msg) {
+		return new ErrorResponseBody(code, msg);
 	}
 
 }

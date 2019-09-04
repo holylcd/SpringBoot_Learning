@@ -2,8 +2,10 @@ package org.holy.tkmapper.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.holy.tkmapper.common.exception.BizException;
 import org.holy.tkmapper.common.http.rest.response.body.ErrorResponseBody;
+import org.holy.tkmapper.constants.biz.IBizStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -14,8 +16,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
-
-import static org.springframework.http.ResponseEntity.status;
 
 /**
  * 全局异常处理
@@ -35,8 +35,11 @@ public class GlobalExceptionHandlerConfig {
 	@ExceptionHandler(BizException.class)
 	public ResponseEntity bizExceptionHandler(BizException e) {
 		HttpStatus httpStatus = e.getHttpStatus();
-		ErrorResponseBody body = ErrorResponseBody.err(httpStatus);
-		return status(httpStatus)
+		IBizStatus bizStatus = e.getBizStatus();
+		ErrorResponseBody body = ErrorResponseBody.err(bizStatus);
+		log.warn("http status: {}, biz status: {}", httpStatus, bizStatus, e);
+		return ResponseEntity
+				.status(httpStatus)
 				.body(body);
 	}
 
@@ -73,8 +76,9 @@ public class GlobalExceptionHandlerConfig {
 		}
 
 		// 响应
-		ErrorResponseBody body = ErrorResponseBody.err(badRequest, message);
-		return status(HttpStatus.BAD_REQUEST)
+		ErrorResponseBody body = ErrorResponseBody.err(badRequest.value(), message);
+		return ResponseEntity
+				.status(badRequest)
 				.body(body);
 	}
 
@@ -94,9 +98,11 @@ public class GlobalExceptionHandlerConfig {
 			message = badRequest.getReasonPhrase();
 		}
 
-		ErrorResponseBody body = ErrorResponseBody.err(badRequest, message);
+		log.warn(ExceptionUtils.getStackTrace(e));
+
+		ErrorResponseBody body = ErrorResponseBody.err(badRequest.value(), message);
 		return ResponseEntity
-				.status(HttpStatus.BAD_REQUEST)
+				.status(badRequest)
 				.body(body);
 	}
 

@@ -1,11 +1,7 @@
 package org.holy.tkmapper.common.exception;
 
-import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * 基础异常
@@ -19,23 +15,42 @@ abstract class BaseException extends RuntimeException {
 
     private static final long serialVersionUID = -4764276147992596434L;
 
+    /**
+     * 默认 http 状态
+     */
     static final HttpStatus DEFAULT_HTTP_STATUS = HttpStatus.INTERNAL_SERVER_ERROR;
 
     private HttpStatus httpStatus;
 
-    public BaseException(@NotNull HttpStatus httpStatus) {
+    public BaseException(HttpStatus httpStatus) {
         super(httpStatus.getReasonPhrase());
         this.httpStatus = httpStatus;
     }
 
-    public BaseException(@NotNull HttpStatus httpStatus, @NotNull Throwable cause) {
+    public BaseException(HttpStatus httpStatus, String message) {
+        super(message);
+        this.httpStatus = httpStatus;
+    }
+
+    public BaseException(HttpStatus httpStatus, Throwable cause) {
         super(httpStatus.getReasonPhrase(), cause);
         this.httpStatus = httpStatus;
     }
 
-    public BaseException(@NotNull HttpStatus httpStatus, @NotNull Throwable cause,
-                         boolean enableSuppression, boolean writableStackTrace) {
+    public BaseException(HttpStatus httpStatus, String message, Throwable cause) {
+        super(message, cause);
+        this.httpStatus = httpStatus;
+    }
+
+    public BaseException(HttpStatus httpStatus, Throwable cause,
+                         boolean enableSuppression,boolean writableStackTrace) {
         super(httpStatus.getReasonPhrase(), cause, enableSuppression, writableStackTrace);
+        this.httpStatus = httpStatus;
+    }
+
+    public BaseException(HttpStatus httpStatus, Throwable cause, String message,
+                         boolean enableSuppression,boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
         this.httpStatus = httpStatus;
     }
 }

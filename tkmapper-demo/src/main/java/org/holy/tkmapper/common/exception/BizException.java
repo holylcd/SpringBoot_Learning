@@ -1,9 +1,8 @@
 package org.holy.tkmapper.common.exception;
 
+import lombok.Getter;
+import org.holy.tkmapper.constants.biz.CommonBizStatus;
 import org.springframework.http.HttpStatus;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * 统一业务异常
@@ -12,23 +11,33 @@ import javax.validation.constraints.NotNull;
  * @email holylcd@foxmail.com
  * @date 2019/4/12
  */
+@Getter
 public class BizException extends BaseException {
 
+    /**
+     * 默认业务状态
+     */
+    static final CommonBizStatus DEFAULT_BIZ_STATUS = CommonBizStatus.INTERNAL_SERVER_ERROR;
+
+    private CommonBizStatus bizStatus;
+
     public BizException() {
-        this(DEFAULT_HTTP_STATUS);
+        this(DEFAULT_HTTP_STATUS, DEFAULT_BIZ_STATUS);
     }
 
-    public BizException(@NotNull HttpStatus httpStatus) {
+    public BizException(HttpStatus httpStatus, CommonBizStatus bizStatus) {
         super(httpStatus);
+        this.bizStatus = bizStatus;
     }
 
-    public BizException(@NotNull HttpStatus httpStatus, @NotNull Throwable cause) {
-        super(httpStatus, cause);
+    public BizException(HttpStatus httpStatus, CommonBizStatus bizStatus, Throwable cause) {
+        this(httpStatus, bizStatus, cause, false, false);
     }
 
-    public BizException(@NotNull HttpStatus httpStatus, @NotNull Throwable cause,
+    public BizException(HttpStatus httpStatus, CommonBizStatus bizStatus, Throwable cause,
                         boolean enableSuppression, boolean writableStackTrace) {
         super(httpStatus, cause, enableSuppression, writableStackTrace);
+        this.bizStatus = bizStatus;
     }
 
 }

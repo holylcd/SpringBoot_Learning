@@ -2,18 +2,15 @@ package org.holy.tkmapper.domain;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import tk.mybatis.mapper.annotation.NameStyle;
-import tk.mybatis.mapper.code.Style;
 
 import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * @Description //TODO
- * @Author holyl
- * @Date 2019/9/2 15:33
- * @Version 1.0.0
+ * 用户信息
+ * @author holy
+ * @date 2019/9/2 15:33
+ * @version 1.0.0
  */
 @Data
 @Accessors(chain = true)
