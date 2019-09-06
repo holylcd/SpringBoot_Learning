@@ -1,0 +1,18 @@
+# JWT
+jwt:
+  secret: MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEA5zq+eVxFz3tHBSCY/iaaQ/lTDW15dz0SftdRR830Y5k8Ei7mFM0BxjkDbaOYdpGqMrXSBkYan7VNJ5MjtgP2aQIDAQABAkA4710BMvg5i2hEWe9x/P1VKWoKz17uPkp0kv3/iTXY4+Vhc5s0tPzSIXgHEpsEqvBHinmHIc7GTf5i7wQUErqlAiEA/I2BS6/VcngnZkahpUwXOjqoT3ItnHxskojoqWaG9UsCIQDqYrqiDURRbs7OsAQvbfcRLEgQSI+iUnvRBWlnHQsWmwIgGpQFxGJX0zkj5FaQkmXEmAMuTVYVyL8raexwl8tLbqsCIFC8p4tQxJrEb6qUySxJVdTtivlI9Wk1vn7WvWMOhxZHAiEA3/2XiVMyiA67NmMj7ylBjkNQhJvHYVSfjEdcP5RLr00=
+  ttl-millis: 86400000
+  header-name: Authorization
+  prefix: Bearer
+
+
+logging:
+  level:
+    org.apache.coyote.http11: debug
+    org.springframework.web: trace
+    org.holy: debug
+
+
+spring:
+  jackson:
+    date-format: "yyyy-MM-dd HH:mm:ss"
